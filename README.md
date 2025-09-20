@@ -95,15 +95,12 @@ cut -d "|" -f 2 file22
 ## OUTPUT
 
 
-cat < newfile 
+cat > newfile 
 ```
 Hello world
 hello world
 ^d
 ````
-cat > newfile 
-Hello world
-hello world
  
 grep Hello newfile 
 ## OUTPUT
