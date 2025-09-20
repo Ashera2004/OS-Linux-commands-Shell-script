@@ -24,20 +24,20 @@ Testing the commands for the desired output.
 ### Create the following files file1, file2 as follows:
 cat > file1
 ```
-chanchal singhvi
-c.k. shukla
-s.n. dasgupta
-sumit chakrobarty
-^d
+Aarav Mehta
+Priya Nair
+Rohan Iyer
+Kavya Reddy
+^C
 ```
 cat > file2
 ```
-anil aggarwal
-barun sengupta
-c.k. shukla
-lalit chowdury
-s.n. dasgupta
-^d
+Emily Carter
+Arjun Sharma
+Micheal Johnson
+Sofia Rossi
+Daniel Muller
+^C
 ```
 ### Display the content of the files
 cat < file1
@@ -69,14 +69,15 @@ cat > file11
 ```
 Hello world
 This is my world
-^d
+This is Siddarth's World
+^C
 ```
 cat > file22
 ```
-1001 | Ram | 10000 | HR
-1002 | tom |  5000 | Admin
-1003 | Joe |  7000 | Developer
-^d
+1001 | Haru | 10000 | HR
+1002 | Ash |  15000 | Admin
+1003 | Sam |  80000 | Developer
+^C
 ```
 
 
@@ -97,9 +98,9 @@ cut -d "|" -f 2 file22
 
 cat > newfile 
 ```
-Hello world
+Hello World
 hello world
-^d
+^C
 ````
  
 grep Hello newfile 
@@ -139,24 +140,17 @@ grep -w -n world newfile
 ## OUTPUT
 
 
-cat < newfile 
-```
-Hello world
-hello world
-Linux is world number 1
-Unix is predecessor
-Linux is best in this World
-^d
-```
+
 
 cat > newfile
 ```
-Hello world
+Hello World
 hello world
-Linux is world number 1
-Unix is predecessor
+Linux is world number 1 OS
+Unix is its predecessor
 Linux is best in this World
-^d
+all thanks to Linus Torvalds
+^C
  ```
 egrep -w 'Hello|hello' newfile 
 ## OUTPUT
