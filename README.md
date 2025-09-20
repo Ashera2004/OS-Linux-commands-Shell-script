@@ -211,17 +211,18 @@ egrep 's{1,2}' newfile
 
 cat > file23
 ```
-1001 | Ram | 10000 | HR
-1001 | Ram | 10000 | HR
-1002 | tom |  5000 | Admin
-1003 | Joe |  7000 | Developer
-1005 | Sam |  5000 | HR
-1004 | Sit |  7000 | Dev
-1003 | Joe |  7000 | Developer
-1001 | Ram | 10000 | HR
-^d
+1001 | Hari   | 10000 | HR
+1001 | Hari   | 10000 | HR
+1002 | Ash    | 15000 | Admin
+1003 | Sam    |  8000 | Dev
+1005 | Meera  | 12000 | HR
+1004 | Kiran  | 11000 | Admin
+1003 | Sam    |  8000 | Dev
+1001 | Hari   | 10000 | HR
+1006 | Arjun  | 13000 | Dev
+1007 | Riya   | 14000 | HR
+^C
 ```
-
 
 sed -n -e '3p' file23
 ## OUTPUT
@@ -233,17 +234,20 @@ sed -n -e '$p' file23
 
 
 
-sed  -e 's/Ram/Sita/' file23
+sed -e 's/Hari/Sita/' file23
+
 ## OUTPUT
 
 
 
-sed  -e '2s/Ram/Sita/' file23
+sed -e '2s/Hari/Sita/' file23
+
 ## OUTPUT
 
 
 
-sed  '/tom/s/5000/6000/' file23
+sed '/Ash/s/15000/16000/' file23
+
 ## OUTPUT
 
 
@@ -253,13 +257,15 @@ sed -n -e '1,5p' file23
 
 
 
-sed -n -e '2,/Joe/p' file23
+sed -n -e '2,/Sam/p' file23
+
 ## OUTPUT
 
 
 
 
-sed -n -e '/tom/,/Joe/p' file23
+sed -n -e '/Ash/,/Sam/p' file23
+
 ## OUTPUT
 
 
@@ -303,11 +309,11 @@ sed -n '2,4{s/$/*/;p}' file23
 #Sorting File content
 cat > file21
 ```
-1001 | Ram | 10000 | HR
-1002 | tom |  5000 | Admin
-1003 | Joe |  7000 | Developer
-1005 | Sam |  5000 | HR
-1004 | Sit |  7000 | Dev
+1001 | Hari   | 10000 | HR
+1001 | Hari   | 10000 | HR
+1002 | Ash    | 15000 | Admin
+1003 | Sam    |  8000 | Dev
+1005 | Meera  | 12000 | HR
 ``` 
 sort file21
 ## OUTPUT
@@ -315,12 +321,11 @@ sort file21
 
 cat > file22
 ```
-1001 | Ram | 10000 | HR
-1001 | Ram | 10000 | HR
-1002 | tom |  5000 | Admin
-1003 | Joe |  7000 | Developer
-1005 | Sam |  5000 | HR
-1004 | Sit |  7000 | Dev
+1004 | Kiran  | 11000 | Admin
+1003 | Sam    |  8000 | Dev
+1001 | Hari   | 10000 | HR
+1006 | Arjun  | 13000 | Dev
+1007 | Riya   | 14000 | HR
 ``` 
 uniq file22
 ## OUTPUT
@@ -332,18 +337,20 @@ uniq file22
 cat file23 | tr [:lower:] [:upper:]
  ## OUTPUT
 
-cat < urllist.txt
-```
-www. yahoo. com
-www. google. com
-www. mrcet.... com
-^d
- ```
 cat > urllist.txt
 ```
-www. yahoo. com
-www. google. com
-www. mrcet.... com
+www.google.com
+www.yahoo.com
+www.lms2.cse.saveetha.in
+www.saveetha.ac.in
+
+ ```
+cat < urllist.txt
+```
+www.google.com
+www.yahoo.com
+www.lms2.cse.saveetha.in
+www.saveetha.ac.in
  ```
 cat urllist.txt | tr -d ' '
  ## OUTPUT
@@ -356,6 +363,7 @@ cat urllist.txt | tr -d ' ' | tr -s '.'
 
 
 #Backup commands
+
 tar -cvf backup.tar *
 ## OUTPUT
 
@@ -375,7 +383,7 @@ tar -xvf backup.tar
 
 gzip backup.tar
 
-ls .gz
+ls *.gz
 ## OUTPUT
  
 gunzip backup.tar.gz
@@ -385,19 +393,21 @@ gunzip backup.tar.gz
 # Shell Script
 ```
 echo '#!/bin/sh' > my-script.sh
-echo 'echo Hello World‘; exit 0 >> my-script.sh
+echo 'echo Hello World' >> my-script.sh
+echo 'exit 0' >> my-script.sh
 ```
 chmod 755 my-script.sh
 ./my-script.sh
+
 ## OUTPUT
 
  
 cat << stop > herecheck.txt
 ```
 hello in this world
-i cant stop
-for this non stop movement
-stop
+I can't stop
+learning linux 
+because it's so fun
 ```
 
 cat herecheck.txt
@@ -462,7 +472,7 @@ echo $?
  
 # mis-using string comparisons
 
-cat < strcomp.sh 
+cat > strcomp.sh 
 ```bash
 \#!/bin/bash
 val1=baseball
@@ -499,7 +509,7 @@ chmod 755 strcomp.sh
 
 
 # check file ownership
-cat < psswdperm.sh 
+cat > psswdperm.sh 
 ```bash
 \#!/bin/bash
 if [ -O /etc/passwd ]
@@ -525,7 +535,7 @@ fi
 ## OUTPUT
 
 # check if with file location
-cat>ifnested.sh 
+cat > ifnested.sh 
 ```bash
 \#!/bin/bash
 if [ -e $HOME ]
@@ -609,62 +619,16 @@ echo “The values are different”
 fi
 ```
 
-$ chmod 755 iftest.sh
+ chmod 755 iftest.sh
  
-$ ./iftest.sh 
+./iftest.sh 
 ##OUTPUT
 
-# check if a file
-cat > ifnested.sh 
-```bash
-\#!/bin/bash
-if [ -e $HOME ]
-then
-echo “$HOME The object exists, is it a file?”
-if [ -f $HOME ]
-then
-echo “Yes,$HOME it is a file!”
-else
-echo “No,$HOME it is not a file!”
-if [ -f $HOME/.bash_history ]
-then
-echo “But $HOME/.bash_history is a file!”
-fi
-fi
-else
-echo “Sorry, the object does not exist”
-fi
-^d
-```
 
-cat ifnested.sh 
-```bash
-\#!/bin/bash
-if [ -e $HOME ]
-then
-echo “$HOME The object exists, is it a file?”
-if [ -f $HOME ]
-then
-echo “Yes,$HOME it is a file!”
-else
-echo “No,$HOME it is not a file!”
-if [ -f $HOME/.bash_history ]
-then
-echo “But $HOME/.bash_history is a file!”
-fi
-fi
-else
-echo “Sorry, the object does not exist”
-fi
-```
-
-$ chmod 755 ifnested.sh
- 
-$ ./ifnested.sh 
 ##OUTPUT
 
 # looking for a possible value using elif
-cat elifcheck.sh 
+cat > elifcheck.sh 
 ```bash
 \#!/bin/bash
 if [ $USER = Ram ]
@@ -686,9 +650,9 @@ echo "Sorry, you are not allowed here"
 fi
 ```
 
-$ chmod 755 elifcheck.sh
+chmod 755 elifcheck.sh
  
-$ ./elifcheck.sh 
+  ./elifcheck.sh 
 ## OUTPUT
 
 
@@ -703,8 +667,9 @@ else
 echo "I cannot write to the file"
 fi
 ```
-$ chmod 755 ifcompound.sh
-$ ./ifcompound.sh 
+chmod 755 ifcompound.sh
+
+./ifcompound.sh 
 ## OUTPUT
 
 # using the case command
@@ -722,11 +687,11 @@ echo "$USER, Do not forget to log off when you're done";;
 echo "Sorry, you are not allowed here";;
 esac
 ```
-$ chmod 755 casecheck.sh 
+chmod 755 casecheck.sh 
  
-$ ./casecheck.sh 
+./casecheck.sh 
  
-cat > whiletest
+cat > whiletest.sh
 ```bash
 #!/bin/bash
 #while command test
@@ -737,12 +702,12 @@ echo $var1
 var1=$[ $var1 - 1 ]
 done
 ```
-$ chmod 755 whiletest.sh
+chmod 755 whiletest.sh
  
-$ ./whiletest.sh
+ ./whiletest.sh
  
  
-cat untiltest.sh 
+cat > untiltest.sh 
 ```bash
 \#using the until command
 var1=100
@@ -751,12 +716,14 @@ do
 echo $var1
 var1=$[ $var1 - 25 ]
 done
-``` 
-$ chmod 755 untiltest.sh
+```
+ chmod 755 untiltest.sh
+
+ ./untiltest.sh
  
+ ## OUTPUT
  
- 
-cat forin1.sh 
+cat > forin1.sh 
 ```bash
 \#!/bin/bash
 \#basic for command
@@ -766,10 +733,10 @@ echo The next state is $test
 done
  ```
  
-$ chmod 755 forin1.sh
+chmod 755 forin1.sh
  
  
-cat forin2.sh 
+cat > forin2.sh 
 ```bash
 \#!/bin/bash
 \# another example of how not to use the for command
@@ -779,9 +746,9 @@ echo “word:$test”
 done
  ```
  
-$ chmod 755 forin2.sh
+chmod 755 forin2.sh
  
-cat forin2.sh 
+cat > forin2.sh 
 ```bash
 \#!/bin/bash
 \# another example of how not to use the for command
@@ -790,11 +757,11 @@ do
 echo “word:$test”
 done
 ```
-$ chmod 755 forin2.sh
+ chmod 755 forin2.sh
  
-$ ./forin2.sh 
+ ./forin2.sh 
  
-cat forin3.sh 
+cat > forin3.sh 
 ```bash
 \#!/bin/bash
 \# another example of how not to use the for command
@@ -803,7 +770,7 @@ do
 echo "word:$test"
 done
 ```
-$ ./forin3.sh 
+ ./forin3.sh 
  
 cat forin1.sh 
 ```bash
@@ -814,10 +781,10 @@ do
 echo The next state is $test
 done
 ```
-$ chmod 755 forin1.sh
+ chmod 755 forin1.sh
 
 ## OUTPUT
-cat forinfile.sh 
+cat > forinfile.sh 
 ```bash
 #!/bin/bash
 # reading values from a file
@@ -827,8 +794,9 @@ do
 echo "Visit beautiful $file“
 done
 ```
-$ chmod 777 forinfile.sh
-$ cat cities
+chmod 777 forinfile.sh
+
+cat cities
 Hyderabad
 Alampur
 Basara
@@ -840,7 +808,7 @@ Khammam
 ## OUTPUT
 
 
-cat forctype.sh 
+cat > forctype.sh 
 ```bash
 #!/bin/bash
 # testing the C-style for loop
@@ -849,11 +817,13 @@ do
 echo "The value of i is $i"
 done
 ````
-$ chmod 755 forctype.sh
-$ ./forctype.sh 
+chmod 755 forctype.sh
+
+./forctype.sh
+
 ## OUTPUT
 
-cat forctype1.sh 
+cat > forctype1.sh 
 ```bash
 #!/bin/bash
 # multiple variables
@@ -862,11 +832,11 @@ do
 echo "$a - $b"
 done
 ```
-$ chmod 755 forctype.sh
-$ ./forctype1.sh 
+chmod 755 forctype.sh
+./forctype1.sh 
 ## OUTPUT
 
-cat fornested1.sh 
+cat > fornested1.sh 
 ```bash
 #!/bin/bash
 # nesting for loops
@@ -879,13 +849,14 @@ echo " Inside loop: $b"
 done
 done
 ```
-$ chmod 755 fornested1.sh
+chmod 755 fornested1.sh
  
-$ ./fornested1.sh 
+./fornested1.sh 
+
  ## OUTPUT
 
  
-cat forbreak.sh 
+cat > forbreak.sh 
 ```bash
 #!/bin/bash
 # breaking out of a for loop
@@ -901,11 +872,11 @@ echo "The for loop is completed“
 ```
 ## OUTPUT
 
-$ chmod 755 forbreak.sh
+chmod 755 forbreak.sh
  
-$ ./forbreak.sh 
+./forbreak.sh 
  
-cat forbreak.sh 
+cat > forbreak.sh 
 ```bash
 #!/bin/bash
 # breaking out of a for loop
@@ -921,12 +892,13 @@ echo "The for loop is completed“
 ```
 
  
-$ chmod 755 forcontinue.sh
+chmod 755 forcontinue.sh
  
-$ ./forcontinue.sh 
+./forcontinue.sh 
+
 ## OUTPUT
  
-cat exread.sh 
+cat > exread.sh 
 ```bash
 #!/bin/bash
 # testing the read command
@@ -935,28 +907,28 @@ read name
 echo "Hello $name, welcome to my program. "
  ```
  
-$ chmod 755 exread.sh 
+chmod 755 exread.sh 
  
-$ ./exread.sh 
+./exread.sh 
 ## OUTPUT
 
 
- cat exread1.sh
+ cat > exread1.sh
 ```bash
 #!/bin/bash
 # testing the read command
 read -p "Enter your name: " name
 echo "Hello $name, welcome to my program. “
 ``` 
-$ chmod 755 exread1.sh 
+chmod 755 exread1.sh 
 
+./exread1.sh 
 ## OUTPUT
 
 
 
-$ ./exread1.sh 
- 
-cat funcex.sh
+
+cat > funcex.sh
 ```bash
 #!/bin/bash
 # trying to access script parameters inside a function
@@ -978,7 +950,7 @@ fi
  ./funcex.sh 1 2
 
  
-cat argshift.sh
+cat > argshift.sh
 ```bash
 #!/bin/bash 
  while (( "$#" )); do 
@@ -986,12 +958,12 @@ cat argshift.sh
   shift 
 done
 ```
-$ chmod 777 argshift.sh
-
+chmod 777 argshift.sh
+./argshift.sh 1 2 3
 ## OUTPUT
-$ ./argshift.sh 1 2 3
+
  
- cat argshift1.sh
+ cat > argshift1.sh
 ```bash
  #/bin/bash 
  # store arguments in a special array 
@@ -1004,11 +976,12 @@ for (( i=0;i<$ELEMENTS;i++)); do
     echo ${args[${i}]} 
 done
 ```
-$ chmod 777 argshift.sh
+chmod 777 argshift.sh
+ ./argshift.sh 1 2 3
 ## OUTPUT
-$ ./argshift.sh 1 2 3
+
  
-cat argshift.sh
+cat > argshift.sh
 ```bash
 #!/bin/bash 
 set -x 
@@ -1018,8 +991,11 @@ while (( "$#" )); do
 done
 set +x
 ```
-## OUTPUT
+
  ./argshift.sh 1 2 3
+ 
+## OUTPUT
+
  
  
 cat > nc.awk
