@@ -505,6 +505,7 @@ fi
 chmod 755 strcomp.sh
  
 ./strcomp.sh 
+
 ## OUTPUT
 
 
@@ -531,7 +532,10 @@ else
 echo “Sorry, you are not the owner of the /etc/passwd file”
 fi
  ```
+chmod 755 psswdperm.sh
+
 ./psswdperm.sh
+
 ## OUTPUT
 
 # check if with file location
@@ -576,8 +580,10 @@ else
 echo “Sorry, the object does not exist”
 fi
 ```
+chmod 755 ifnested.sh
 
 ./ifnested.sh 
+
 ## OUTPUT
 
 
@@ -619,13 +625,12 @@ echo “The values are different”
 fi
 ```
 
- chmod 755 iftest.sh
+chmod 755 iftest.sh
  
 ./iftest.sh 
-##OUTPUT
 
+## OUTPUT
 
-##OUTPUT
 
 # looking for a possible value using elif
 cat > elifcheck.sh 
@@ -652,12 +657,13 @@ fi
 
 chmod 755 elifcheck.sh
  
-  ./elifcheck.sh 
+./elifcheck.sh 
+
 ## OUTPUT
 
 
 # testing compound comparisons
-cat> ifcompound.sh 
+cat > ifcompound.sh 
 ```bash
 \#!/bin/bash
 if [ -d $HOME ] && [ -w $HOME ]
@@ -670,10 +676,11 @@ fi
 chmod 755 ifcompound.sh
 
 ./ifcompound.sh 
+
 ## OUTPUT
 
 # using the case command
-cat >casecheck.sh 
+cat > casecheck.sh 
 ```bash
 case $USER in
 Ram | Robert)
@@ -690,6 +697,9 @@ esac
 chmod 755 casecheck.sh 
  
 ./casecheck.sh 
+
+ ## OUTPUT
+
  
 cat > whiletest.sh
 ```bash
@@ -702,9 +712,10 @@ echo $var1
 var1=$[ $var1 - 1 ]
 done
 ```
+
 chmod 755 whiletest.sh
  
- ./whiletest.sh
+./whiletest.sh
  
  
 cat > untiltest.sh 
@@ -717,9 +728,9 @@ echo $var1
 var1=$[ $var1 - 25 ]
 done
 ```
- chmod 755 untiltest.sh
+chmod 755 untiltest.sh
 
- ./untiltest.sh
+./untiltest.sh
  
  ## OUTPUT
  
@@ -734,7 +745,8 @@ done
  ```
  
 chmod 755 forin1.sh
- 
+
+./forin1.sh
  
 cat > forin2.sh 
 ```bash
@@ -747,19 +759,10 @@ done
  ```
  
 chmod 755 forin2.sh
+
+./forin2.sh
  
-cat > forin2.sh 
-```bash
-\#!/bin/bash
-\# another example of how not to use the for command
-for test in I don't know if this'll work
-do
-echo “word:$test”
-done
-```
- chmod 755 forin2.sh
- 
- ./forin2.sh 
+## OUTPUT
  
 cat > forin3.sh 
 ```bash
@@ -770,20 +773,12 @@ do
 echo "word:$test"
 done
 ```
+
+chmod 755 forin3.sh
+
  ./forin3.sh 
  
-cat forin1.sh 
-```bash
-#!/bin/bash
-# basic for command
-for test in Alabama Alaska Arizona Arkansas California Colorado
-do
-echo The next state is $test
-done
-```
- chmod 755 forin1.sh
 
-## OUTPUT
 cat > forinfile.sh 
 ```bash
 #!/bin/bash
@@ -794,9 +789,11 @@ do
 echo "Visit beautiful $file“
 done
 ```
+```bash
 chmod 777 forinfile.sh
 
-cat cities
+cat > cities
+
 Hyderabad
 Alampur
 Basara
@@ -804,7 +801,7 @@ Warangal
 Adilabad
 Bhadrachalam
 Khammam
-
+```
 ## OUTPUT
 
 
@@ -870,25 +867,27 @@ echo "Iteration number: $var1"
 done
 echo "The for loop is completed“
 ```
-## OUTPUT
 
 chmod 755 forbreak.sh
  
 ./forbreak.sh 
+
+## OUTPUT
+
  
-cat > forbreak.sh 
+cat > forcontinue.sh 
 ```bash
 #!/bin/bash
-# breaking out of a for loop
 for var1 in 1 2 3 4 5
 do
-if [ $var1 -eq 3 ]
-then
-continue
-fi
-echo "Iteration number: $var1"
+  if [ $var1 -eq 3 ]
+  then
+    continue
+  fi
+  echo "Iteration number: $var1"
 done
-echo "The for loop is completed“
+echo "The for loop is completed"
+
 ```
 
  
@@ -918,7 +917,8 @@ chmod 755 exread.sh
 #!/bin/bash
 # testing the read command
 read -p "Enter your name: " name
-echo "Hello $name, welcome to my program. “
+echo "Hello $name, welcome to my program."
+
 ``` 
 chmod 755 exread1.sh 
 
@@ -976,12 +976,12 @@ for (( i=0;i<$ELEMENTS;i++)); do
     echo ${args[${i}]} 
 done
 ```
-chmod 777 argshift.sh
- ./argshift.sh 1 2 3
+chmod 777 argshift1.sh
+ ./argshift1.sh 1 2 3
 ## OUTPUT
 
  
-cat > argshift.sh
+cat > argshift2.sh
 ```bash
 #!/bin/bash 
 set -x 
@@ -991,8 +991,9 @@ while (( "$#" )); do
 done
 set +x
 ```
+chmod 777 argshift2.sh
 
- ./argshift.sh 1 2 3
+./argshift2.sh 1 2 3
  
 ## OUTPUT
 
@@ -1012,7 +1013,7 @@ print "Number of Lines are",NR
 print "No of Words count:",wordcount
 }
  ```
-cat>data.dat
+cat > data.dat
 ```bash
 bcdfghj
 abcdfghj
